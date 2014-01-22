@@ -1,0 +1,400 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>control_center_ids.sikuli\control_center_ids.sikuli</h2> <a href="control_center_ids.sikuli\control_center_ids.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> __future__ <span class="kw">import</span> with_statement
+<span class="kw">from</span> sikuli.Sikuli <span class="kw">import</span> *
+<span class="kw">import</span> os
+imagenscc = <span class="str">"C:\\Users\\lupinthe-3rd\\Documents\\teste_automatico\\imagens\\control_center\\"</span>
+addImagePath(imagenscc)
+
+<span class="kw">class</span> ControlCenter(object):
+
+    <span class="kw">def</span> __init__(self):
+        <span class="cmt">#self.appCoordinates = (0, 0, 1024, 768)
+</span>        self.caminhoControlCenter = <span class="str">r'"C:\Users\lupinthe-3rd\Desktop\controlcenter\AkerControlCenter2\aker_control_center2.exe"'</span>
+        self.checaProcessoControlCenter = <span class="dig">0</span>
+        self.controlCenterApp = <span class="dig">0</span>
+        self.menuEsquerdo = <span class="dig">0</span>
+        self.menuConfigurationChecker = <span class="dig">0</span>
+        self.subMenuSystemConfigurations = <span class="dig">0</span>
+        self.telaIdsIps = <span class="dig">0</span>
+
+    <span class="kw">def</span> checaFoco(self):
+        <span class="kw">if</span> exists(<img src="menu_superior_esquerdo.png" />):
+            <span class="kw">return</span> <span class="dig">1</span>
+        <span class="kw">else</span>:
+            <span class="kw">return</span> <span class="dig">0</span>
+
+    <span class="kw">def</span> entraEmFoco(self):
+        <span class="skw">click</span>(<img src="aker_logo_icone.png" />)
+
+    <span class="kw">def</span> fechaJanelaConfigurarionCheckerDemo(self):
+        janela = <span class="skw">find</span>(<img src="cabecario_demo_configuration_checker.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="botao_fechar_configuration_checker.png" />))
+
+    <span class="kw">def</span> minimizaJanelaIpsIdsDemo(self):
+        janela = <span class="skw">find</span>(<img src="cabecario_demo_ips_ids.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="botao_minimizar_ips_ids.png" />))
+
+    <span class="kw">def</span> checaMinimizaJanelaIpsIdsDemo(self):
+        <span class="kw">if</span> exists(<img src="cabecario_demo_ips_ids_minimizado.png" />):
+            logmsg = <span class="str">"minimizado com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"erro ao minimizar"</span>
+            <span class="kw">return</span> <span class="dig">1</span>,logmsg
+
+    <span class="kw">def</span> maximizaJanelaIpsIdsDemo(self):
+        janela = <span class="skw">find</span>(<img src="cabecario_demo_ips_ids_minimizado.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="botao_maximizar_ips_ids.png" />))
+
+    <span class="kw">def</span> checaMaximizaJanelaIpsIdsDemo(self):
+        <span class="kw">if</span> exists(<img src="cabecario_demo_ips_ids.png" />):
+            logmsg = <span class="str">"maximizado com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"erro ao maximizar"</span>
+            <span class="kw">return</span> <span class="dig">1</span>,logmsg
+    <span class="kw">def</span> fechaJanelaExpandidaIpsIdsDemo(self):
+        janela = <span class="skw">find</span>(<img src="cabecario_demo_ips_ids.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="botao_fechar_ips_ids.png" />))
+
+    <span class="kw">def</span> checaFechaJanelaExpandidaIpsIdsDemo(self):
+        <span class="kw">if</span> exists(<img src="cabecario_demo_ips_ids.png" />):
+            logmsg = <span class="str">"janela ids ips nao foi fechada"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"janela ids ips fechada com sucesso"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+
+
+    <span class="kw">def</span> iniciarControlCenter(self):
+        self.controlCenterApp = App(<span class="str">"Aker Control Center"</span>)
+        <span class="kw">if</span> <span class="kw">not</span> self.controlCenterApp.window():
+            App.open(self.caminhoControlCenter); <span class="skw">wait</span>(<span class="dig">2</span>)
+        <span class="cmt">#self.controlCenterApp.focus()
+</span>        <span class="kw">if</span> self.checaFoco() == <span class="dig">0</span>:
+            self.entraEmFoco()
+
+    <span class="kw">def</span> checaIniciarControlCenter(self):
+        <span class="cmt"># check application
+</span>        self.controlCenterApp.focus()
+        <span class="kw">if</span> exists(<img src="menu_superior_esquerdo.png" />):
+            logmsg = <span class="str">"Control center foi executada com sucesso"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Control center não foi executada"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+
+    <span class="kw">def</span> minimizaSystemConfigurations(self):
+        janela = <span class="skw">find</span>(<img src="system_configuration_expandido.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="minimizar_system_configurations.png" />))
+
+    <span class="kw">def</span> checaMinimizaSystemConfigurations(self):
+        <span class="kw">if</span> exists(<img src="system_configuration_expandido.png" />):
+            logmsg = <span class="str">"erro ao minimizar system configurations"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"systemn configuration minimizado com sucesso"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+
+
+    <span class="kw">def</span> minimizaTools(self):
+        janela = <span class="skw">find</span>(<img src="menu_esquerdo_tools_expandido.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="minimizar_system_configurations.png" />))
+
+    <span class="kw">def</span> checaMinimizaTools(self):
+        <span class="kw">if</span> exists(<img src="menu_esquerdo_tools_expandido.png" />):
+            logmsg = <span class="str">"erro ao minimizar tools"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Tools minimizado com sucesso"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+
+    <span class="kw">def</span> verificaExistenciaControlCenter():
+        <span class="kw">pass</span>
+
+    <span class="kw">def</span> conectaAkDemo67(self):
+        self.menuEsquerdo = <span class="skw">find</span>(<img src="menu_medio_esquerdo.png" />)
+        <span class="skw">doubleClick</span>(self.menuEsquerdo.<span class="skw">find</span>(<img src="menu_medio_esquerdo_demo_fw.png" />))
+
+    <span class="kw">def</span> checaConectaAkDemo67(self):
+        self.menuEsquerdo = <span class="skw">find</span>(<img src="menu_medio_esquerdo_demo_fw_expandido.png" />)
+        <span class="cmt">#self.menuConfigurationChecker = find("menu_configuration_checker.png")
+</span>        <span class="kw">if</span> self.menuEsquerdo.inside().exists(<img src="menu_demo_expandido.png" />):
+            logmsg = <span class="str">"conectado ao demo do fireall 6.7 com sucesso"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Não foi possivel se conectar a demo do firewall 6.7"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+
+    <span class="kw">def</span> firewall67ExpandeMenuSystemConfigurations(self):
+        self.menuEsquerdo = <span class="skw">find</span>(<img src="menu_medio_esquerdo_demo_fw_expandido.png" />)
+        self.menuEsquerdo.inside().<span class="skw">doubleClick</span>(<img src="menu_medio_esquerdo_ak67_system_conf.png" />)
+        self.subMenuSystemConfigurations = <span class="skw">find</span>(<img src="fw67_sub_menu_system_configurations.png" />)
+        self.subMenuSystemConfigurations.inside().<span class="skw">doubleClick</span>(<img src="intem_ips_ids.png" />)
+
+    <span class="kw">def</span> checaFirewall67ExpandeMenuSystemConfigurations(self):
+        self.telaIdsIps = <span class="skw">find</span>(<img src="tela_ids_ips.png" />)
+
+    <span class="kw">def</span> maximizaSecurity(self):
+        janela = <span class="skw">find</span>(<img src="menu_medio_esquerdo_ak67_security.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="botao_expandir.png" />))
+
+    <span class="kw">def</span> checaMaximizaSecurity(self):
+        <span class="kw">if</span> exists(<img src="menu_esquerdo_security_expandido.png" />):
+            logmsg = <span class="str">"menu security expandido com sucesso"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Erro ao tentar expandir menu security"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+
+    <span class="kw">def</span> entraIdsIps(self):
+        janela = <span class="skw">find</span>(<img src="menu_esquerdo_security_expandido.png" />)
+        <span class="skw">doubleClick</span>(janela.<span class="skw">find</span>(<img src="item_ips_ids.png" />))
+
+    <span class="kw">def</span> checaEntraIdsIps(self):
+        <span class="kw">if</span> exists(<img src="tela_security_ids_ips.png" />):
+            logmsg = <span class="str">"Entrou na tela de ids ips com sucesso"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Erro ao tentar encontrar a tela ids ips"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+
+    <span class="kw">def</span> minimizaTelaSecurityIdsIps(self):
+        janela = <span class="skw">find</span>(<img src="cabecario_demo_security_ids_ips.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="botao_minimizar_generico.png" />))
+
+    <span class="kw">def</span> checaMinimizaTelaSecurityIdsIps(self):
+        <span class="kw">if</span> exists(<img src="janela_security_minimizada.png" />):
+            logmsg = <span class="str">"janela minimizada com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"erro ao minimizar janela demo-sucutiry-ips-ids"</span>
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+
+    <span class="kw">def</span> maximizaTelaSecurityIdsIps(self):
+        janela = <span class="skw">find</span>(<img src="janela_security_minimizada.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="botao_expandir_generico.png" />))
+
+    <span class="kw">def</span> checaMaximizaTelaSecurityIdsIps(self):
+        <span class="kw">if</span> exists(<img src="tela_security_ids_ips.png" />):
+            logmsg = <span class="str">"Maximizado ids ips com sucesso"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Erro ao tentar maximizar tela minimizada demo-security-ips-ids"</span>
+            <span class="kw">print</span> logmsg
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+
+    <span class="kw">def</span> fechaTelaSecurityIdsIps(self):
+        janela = <span class="skw">find</span>(<img src="cabecario_demo_security_ids_ips.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="boatao_fechar_generico.png" />))
+
+    <span class="kw">def</span> checaFechaTelaSecurityIdsIps(self):
+        <span class="kw">if</span> exists(<img src="tela_security_ids_ips.png" />):
+            logmsg = <span class="str">"erro ao fechar janela demo-security-ids-ips"</span>
+            <span class="kw">return</span> <span class="dig">1</span>,logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"janela fechada com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>,logmsg
+
+    <span class="kw">def</span> minimizaSecurity(self):
+        janela = <span class="skw">find</span>(<img src="demo_security_expandido_ips_ids_selecionado.png" />)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(<img src="botao_contrair_generico.png" />))
+
+    <span class="kw">def</span> checaMinimizaSecurity(self):
+        <span class="kw">if</span> exists(<img src="demo_security_expandido_ips_ids_selecionado.png" />):
+            logmsg = <span class="str">"Erro ao minimizar menu demo-security-ids-ips"</span>
+            <span class="kw">return</span> <span class="dig">1</span>,logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Janela demo-security-ids-ips fechada com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>,logmsg
+
+    <span class="kw">def</span> expandeFw67DemoAplication(self):
+        janela = <span class="skw">find</span>(<img src="menu_esquerdo_demo.png" />)
+        <span class="skw">doubleClick</span>(janela.<span class="skw">find</span>(<img src="submenu_aplication.png" />))
+
+    <span class="kw">def</span> checaExpandeFw67DemoAplication(self):
+        <span class="kw">if</span> exists(<img src="menu_esquer_aplication_expandido.png" />):
+            logmsg = <span class="str">"menu expandido demo-aplication expandido com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>, logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"erro ao expandido demo-aplication"</span>
+            <span class="kw">return</span> <span class="dig">1</span>, logmsg
+
+    <span class="kw">def</span> abreAplicationDpi(self):
+        janela = <span class="skw">find</span>(<img src="menu_esquer_aplication_expandido.png" />)
+        <span class="skw">doubleClick</span>(janela.<span class="skw">find</span>(<img src="item_dpi.png" />))
+
+    <span class="kw">def</span> checaAbreAplicationDpi(self):
+        <span class="kw">if</span> exists(<img src="tela_dpi.png" />):
+            logmsg = <span class="str">"Tela fw67-demo-aplication-dpi aberta com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>,logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Erro ao abrir fw67-demo-aplication-dpi"</span>
+            <span class="kw">return</span> <span class="dig">1</span>,logmsg
+
+    <span class="kw">def</span> minimizaFw67DemoAplicationDpi(self):
+        <span class="cmt">#janela = find("cabecario_demo_aplication_dpi.png")
+</span>        <span class="cmt">#click(janela.find("botao_minimizar_generico.png"))
+</span>        self.encontreEClick(<img src="cabecario_demo_aplication_dpi.png" />, <img src="botao_minimizar_generico.png" />)
+
+    <span class="kw">def</span> checaMinimizaFw67DemoAplicationDpi(self):
+        <span class="kw">if</span> exists(<img src="cabecario_demo_aplication_dpi_minimizado.png" />):
+            logmsg = <span class="str">"tela fw67-demo-aplication-dpi minimizada com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>,logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"erro ao minimizar tela fw67-demo-aplication-dpi"</span>
+            <span class="kw">return</span> <span class="dig">1</span>,logmsg
+
+    <span class="kw">def</span> maximizaFw67DemoAplicationDpi(self):
+        <span class="cmt">#janela = find("cabecario_demo_aplication_dpi_minimizado.png")
+</span>        <span class="cmt">#click(janela.find("botao_expandir_generico.png"))
+</span>        self.encontreEClick(<img src="cabecario_demo_aplication_dpi_minimizado.png" />, <img src="botao_expandir_generico.png" />)
+
+    <span class="kw">def</span> checaMaximizarFw67DemoAplicationDpi(self):
+        <span class="kw">if</span> exists(<img src="tela_dpi.png" />):
+            logmsg = <span class="str">"Tela fw67-demo-aplication-dpi expandida com sucesso"</span>
+            <span class="kw">return</span> <span class="dig">0</span>,logmsg
+        <span class="kw">else</span>:
+            logmsg = <span class="str">"Erro ao expandir fw67-demo-aplication-dpi"</span>
+            <span class="kw">return</span> <span class="dig">1</span>,logmsg
+
+    <span class="kw">def</span> encontreEClick(self, imagemCompleta, objetoClicar):
+        janela = <span class="skw">find</span>(imagemCompleta)
+        <span class="skw">click</span>(janela.<span class="skw">find</span>(objetoClicar))
+
+
+
+
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    setShowActions(True)
+    cc = ControlCenter()
+    cc.iniciarControlCenter()
+    cc.checaIniciarControlCenter()
+    cc.conectaAkDemo67()
+    cc.checaConectaAkDemo67()
+    cc.fechaJanelaConfigurarionCheckerDemo()
+    cc.firewall67ExpandeMenuSystemConfigurations()
+    cc.checaFirewall67ExpandeMenuSystemConfigurations()
+    cc.minimizaJanelaIpsIdsDemo()
+    <span class="kw">print</span> cc.checaMinimizaJanelaIpsIdsDemo()
+    cc.maximizaJanelaIpsIdsDemo()
+    <span class="kw">print</span> cc.checaMaximizaJanelaIpsIdsDemo()
+    cc.fechaJanelaExpandidaIpsIdsDemo();<span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="kw">print</span> cc.checaFechaJanelaExpandidaIpsIdsDemo()
+    cc.minimizaSystemConfigurations()
+    <span class="kw">print</span> cc.checaMinimizaSystemConfigurations()
+    cc.minimizaTools()
+    <span class="kw">print</span> cc.checaMinimizaTools()
+    cc.maximizaSecurity()
+    <span class="kw">print</span> cc.checaMaximizaSecurity()
+    cc.entraIdsIps()
+    <span class="kw">print</span> cc.checaEntraIdsIps()
+    cc.minimizaTelaSecurityIdsIps()
+    <span class="kw">print</span> cc.checaMinimizaTelaSecurityIdsIps()
+    cc.maximizaTelaSecurityIdsIps()
+    <span class="kw">print</span> cc.checaMaximizaTelaSecurityIdsIps()
+    cc.fechaTelaSecurityIdsIps()
+    <span class="kw">print</span> cc.checaFechaTelaSecurityIdsIps()
+    cc.minimizaSecurity()
+    <span class="kw">print</span> cc.checaMinimizaSecurity()
+    cc.expandeFw67DemoAplication()
+    <span class="kw">print</span> cc.checaExpandeFw67DemoAplication()
+    cc.abreAplicationDpi()
+    <span class="kw">print</span> cc.checaAbreAplicationDpi()
+    cc.minimizaFw67DemoAplicationDpi()
+    <span class="kw">print</span> cc.checaMinimizaFw67DemoAplicationDpi()
+    cc.maximizaFw67DemoAplicationDpi();<span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="kw">print</span> cc.checaMaximizarFw67DemoAplicationDpi()
+
+
+
+    exit()
+</pre>
+</body>
+</html>

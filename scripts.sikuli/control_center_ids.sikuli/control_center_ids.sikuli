@@ -1,0 +1,51 @@
+from __future__ import with_statement
+from sikuli.Sikuli import *
+import os
+imagenscc = "C:\\Users\\lupinthe-3rd\\Documents\\teste_automatico\\imagens\\control_center\\"
+addImagePath(imagenscc)
+
+class ControlCenter(object):
+
+    def __init__(self):
+        self.appCoordinates = (0, 0, 1024, 768)
+        self.caminhoControlCenter = r'"C:\Users\lupinthe-3rd\Desktop\controlcenter\AkerControlCenter2\aker_control_center2.exe"'
+        self.menuMedioEsquerdo = find("menu_medio_esquerdo.png")
+
+    def iniciarControlCenter(self):
+        controlCenterApp = App("Aker Control Center")
+        if not controlCenterApp.window():
+            #App.open(self.caminhoControlCenter); wait(2)
+            os.system(self.caminhoControlCenter)
+            #controlCenterApp.focus(); wait(1)
+
+    def checaIniciarControlCenter(self):
+        # check application
+        if exists("menu_superior_esquerdo.png"):
+            logmsg = "Control center foi executada com sucesso"
+            print logmsg
+            return 0, logmsg
+        else:
+            logmsg = "Control center não foi executada"
+            print logmsg
+            return 1, logmsg
+        
+    def conectaAkDemo67(self):
+        doubleClick(self.menuMedioEsquerdo.find("menu_medio_esquerdo_demo_fw.png"))
+        
+        if exists("configuration_checker.png"):
+            logmsg = "conectado ao demo do fireall 6.7 com sucesso"
+            print logmsg
+            return 0, logmsg
+        else:
+            logmsg = "Não foi possivel se conectar a demo do firewall 6.7"
+            print logmsg 
+            return 1, logmsg
+        
+
+if __name__ == "__main__":
+    setShowActions(True)
+    cc = ControlCenter()
+    cc.iniciarControlCenter()
+    cc.checaIniciarControlCenter()
+    cc.conectaAkDemo67()
+    exit()
